@@ -1,0 +1,182 @@
+@font-face {
+    font-family: 'Segoe UI Bold';
+    src: url('/Segoe UI Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif; /* Use Lato as the base font */
+    color: #e0e0e0; /* Lighter text color */
+    background-color: #121212; /* Slightly softer black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent scrollbars caused by background */
+    line-height: 1.6;
+}
+
+/* --- Loading Screen --- */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background-color: #121212; /* Match body background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   /* Updated spinner colors for a more subtle look */
+   background: radial-gradient(farthest-side,#cccccc 94%,#0000) top/9px 9px no-repeat,
+          conic-gradient(#0000 30%,#cccccc);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   animation: spinner-c7wet2 1s infinite linear;
+}
+
+
+@keyframes spinner-c7wet2 {
+   100% {
+      transform: rotate(1turn);
+   }
+}
+
+
+/* --- Background --- */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure background is behind content */
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    /* Subtle grid background */
+    --color: rgba(80, 80, 80, 0.2); /* Softer grid line color */
+    background-color: #121212; /* Match body background */
+    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
+    background-size: 50px 50px; /* Slightly adjusted size */
+}
+
+
+/* --- Content --- */
+.content {
+    position: relative; /* Needed for z-index stacking */
+    z-index: 1;
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
+    background: rgba(28, 28, 28, 0.8); /* Dark semi-transparent background for content */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Subtle shadow */
+    backdrop-filter: blur(4px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+.main-title {
+    font-family: 'Segoe UI Bold', 'Montserrat', sans-serif; /* Use Segoe UI Bold */
+    font-size: 4rem; /* Larger title */
+    margin-bottom: 30px; /* Increased spacing */
+    color: #ffffff; /* White title */
+    letter-spacing: 2px; /* Slight letter spacing */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+.favorites-container h2 {
+    font-family: 'Segoe UI Bold', 'Montserrat', sans-serif; /* Match title font */
+    font-size: 1.8rem; /* Adjusted size */
+    color: #cccccc; /* Slightly dimmer heading color */
+    margin-bottom: 25px; /* Increased spacing */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle underline */
+    padding-bottom: 10px;
+    display: inline-block; /* Keep underline tight */
+}
+
+.favorites-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center items */
+    gap: 15px; /* Spacing between items */
+}
+
+.favorites-list li {
+    background-color: rgba(60, 60, 60, 0.7); /* Slightly lighter item background */
+    padding: 10px 20px;
+    border-radius: 20px; /* Pill shape */
+    font-size: 0.95rem;
+    font-weight: 400; /* Regular Lato weight */
+    color: #e0e0e0;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    cursor: default; /* Indicate non-interactive */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow on items */
+}
+
+.favorites-list li:hover {
+    background-color: rgba(80, 80, 80, 0.9); /* Darker on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+/* --- Font Awesome --- */
+.fa-icon { /* Example class if you were using icons */
+    margin-right: 8px;
+    color: #bbbbbb;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 3rem;
+    }
+    .favorites-container h2 {
+        font-size: 1.5rem;
+    }
+    .favorites-list li {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    .content {
+        padding: 30px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    .favorites-list {
+        gap: 10px; /* Reduce gap on smaller screens */
+    }
+     .favorites-list li {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+     .content {
+        padding: 20px 10px;
+        border-radius: 10px;
+    }
+}
